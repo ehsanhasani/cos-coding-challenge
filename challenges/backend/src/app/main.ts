@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
 import {Container} from "inversify";
 import {ILogger} from "./services/Logger/interface/ILogger";
 import {Logger} from "./services/Logger/classes/Logger";
