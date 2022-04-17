@@ -2,6 +2,7 @@ import axios from "axios";
 import { AuthenticaionFaild } from "../exceptions/AuthenticaionFaild";
 import { AuthenticaionInvalidUserMailId } from "../exceptions/AuthenticationInvalidUserMailId";
 import { IAuthentication } from "../interface/IAuthentication";
+import { IAuthenticationHeader } from "../interface/IAuthenticationHeader";
 import { IAuthenticationResult } from "../interface/IAuthenticationResult";
 import { ICanBeAuthenticate } from "../interface/ICanBeAuthenticated";
 
@@ -18,6 +19,10 @@ export class Authentication implements IAuthentication {
 
     public getToken(): string {
         return this.getResult().token;
+    }
+
+    public getInternalUserUUID(): string {
+        return this.getResult().internalUserUUID;
     }
 
     public async authenticate(actor: ICanBeAuthenticate): Promise<IAuthentication> {
@@ -41,6 +46,13 @@ export class Authentication implements IAuthentication {
         }
 
         return this;
+    }
+
+    public getAuthenticationHeader(): IAuthenticationHeader {
+        return {
+            authtoken: this.getToken(),
+            userid: this.getInternalUserUUID()
+        }
     }
 
     public static getInstance(): IAuthentication {
