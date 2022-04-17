@@ -1,6 +1,9 @@
+import { injectable } from "inversify";
+import "reflect-metadata";
 import { ICanBeAuthenticate, IAuthenticationParams } from "../../Authentication";
 import { IBuyer } from "../interface/IBuyer";
 
+@injectable()
 export class Buyer implements IBuyer, ICanBeAuthenticate {
 
     private email: string = '';

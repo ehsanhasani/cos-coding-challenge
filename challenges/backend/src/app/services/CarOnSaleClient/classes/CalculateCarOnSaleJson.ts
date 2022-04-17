@@ -1,6 +1,9 @@
+import { injectable } from "inversify";
+import "reflect-metadata";
 import { IAuctionCollection } from "../../Auction";
 import { ICarOnSaleCalculation } from "../interface/ICarOnSaleCalculation";
 
+@injectable()
 export class CalculateCarOnSaleJson implements ICarOnSaleCalculation {
     public calculate(auctions: IAuctionCollection): string {
         const result = {

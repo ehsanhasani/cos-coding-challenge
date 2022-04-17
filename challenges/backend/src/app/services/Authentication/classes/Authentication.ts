@@ -1,4 +1,6 @@
 import axios from "axios";
+import { injectable } from "inversify";
+import "reflect-metadata";
 import { AuthenticaionFaild } from "../exceptions/AuthenticaionFaild";
 import { AuthenticaionInvalidUserMailId } from "../exceptions/AuthenticationInvalidUserMailId";
 import { IAuthentication } from "../interface/IAuthentication";
@@ -6,6 +8,7 @@ import { IAuthenticationHeader } from "../interface/IAuthenticationHeader";
 import { IAuthenticationResult } from "../interface/IAuthenticationResult";
 import { ICanBeAuthenticate } from "../interface/ICanBeAuthenticated";
 
+@injectable()
 export class Authentication implements IAuthentication {
     private result: IAuthenticationResult;
 
