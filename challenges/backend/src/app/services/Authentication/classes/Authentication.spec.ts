@@ -72,5 +72,16 @@ describe('Authentication', () => {
             expect(err).instanceof(AuthenticaionFaild);
         }
     });
+
+    it('Get header for authorizaion for different Api call', async () => {
+        const resolved = new Promise((r) => r({ data: result }));
+        sandbox.stub(axios, 'put').returns(resolved);
+        const instance = Authentication.getInstance();
+        await instance.authenticate(actor);
+        const header = instance.getAuthenticationHeader();
+
+        expect(header.authtoken).equal(result.token);
+        expect(header.userid).equal(result.internalUserUUID);
+    });
     
 });
