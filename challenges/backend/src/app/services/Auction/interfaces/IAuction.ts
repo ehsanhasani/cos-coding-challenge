@@ -23,4 +23,6 @@ export interface IAuction {
     originalMinimumRequiredAskNet: string,
     currentHighestBidValueNet: number,
     amIHighestBidder: boolean
+
+    bidRatio: number;
 }

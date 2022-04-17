@@ -6,6 +6,6 @@ import { IAuthentication } from "../../Authentication";
  */
 export interface ICarOnSaleClient {
 
-    getRunningAuctions(auth: IAuthentication): Promise<IAuctionCollection>
+    getRunningAuctions(auth: IAuthentication): Promise<IAuctionCollection>;
 
 }

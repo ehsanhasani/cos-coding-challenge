@@ -25,4 +25,8 @@ export class Auction implements IAuction  {
     startedAt: string;
     createdAt: string;
     updatedAt: string;
+
+    public get bidRatio(): number {
+        return this.currentHighestBidValue / this.minimumRequiredAsk;
+    }
 }
