@@ -6,7 +6,9 @@
   "scripts": {
     "start": "npx ts-node src/app/main.ts",
     "test": "./node_modules/.bin/mocha --require ts-node/register ./src/**/*.spec.ts",
-    "lint": "eslint \"{src,test}/**/*.ts\" --fix --max-warnings=0"
+    "lint": "eslint \"{src,test}/**/*.ts\" --fix --max-warnings=0",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\""
   },
   "author": "",
   "license": "ISC",
