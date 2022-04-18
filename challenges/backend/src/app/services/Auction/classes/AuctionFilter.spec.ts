@@ -27,6 +27,7 @@ describe('AuctionFilter', () => {
         const result = instance.getQueryString();
 
         expect(result.includes('filter')).equal(true);
+        expect(result.includes('count')).equal(true);
     });
    
 });
