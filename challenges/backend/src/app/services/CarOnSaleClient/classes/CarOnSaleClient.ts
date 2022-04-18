@@ -2,6 +2,7 @@ import axios from "axios";
 import { injectable } from "inversify";
 import "reflect-metadata";
 import { IAuctionCollection, AuctionCollection } from "../../Auction";
+import { AuctionFilter } from "../../Auction/classes/AuctionFilter";
 import { IAuthentication } from "../../Authentication";
 import { ICarOnSaleClient } from "../interface/ICarOnSaleClient";
 
@@ -9,10 +10,11 @@ import { ICarOnSaleClient } from "../interface/ICarOnSaleClient";
 export class CarOnSaleClient implements ICarOnSaleClient {
 
     public async getRunningAuctions(auth: IAuthentication): Promise<IAuctionCollection> {
+        const filter = AuctionFilter.getInstance();
         const headers = auth.getAuthenticationHeader();
-        console.log(process.env.API_BASE_URL);
+        const url = `${process.env.API_BASE_URL}/v2/auction/buyer/`;
         const result = await axios.get(
-            `${process.env.API_BASE_URL}/v2/auction/buyer/?filter=%20&count=false`,
+            `${url}${filter.getQueryString()}`,
             { headers: { authtoken: headers.authtoken, userid: headers.userid } }
         );
 

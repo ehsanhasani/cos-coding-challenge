@@ -19,18 +19,16 @@ export class AuctionMonitorApp {
     public async start(): Promise<void> {
         this.logger.log(`Auction Monitor started.`);
 
-        try {
-            const buyer = Buyer.getInstance('buyer-challenge@caronsale.de', 'Test123.');
+        const buyer = Buyer.getInstance('buyer-challenge@caronsale.de', 'Test123.');
 
-            await this.authentication.authenticate(buyer);
-            
-            const collection = await this.carOnSaleClient.getRunningAuctions(this.authentication);
-            const output = await this.calculateClientJson.calculate(collection);
-            
-            this.logger.log(`Auction Output: ${output}`);
-        } catch (err) {
-            // console.log(err);
-        }
+        await this.authentication.authenticate(buyer);
+        
+        const collection = await this.carOnSaleClient.getRunningAuctions(this.authentication);
+        const output = await this.calculateClientJson.calculate(collection);
+        
+        this.logger.log(`Auction Output: ${output}`);
+
+        process.exitCode = 0;
     }
 
 }
