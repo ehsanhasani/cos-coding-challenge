@@ -6,7 +6,7 @@ describe('AuctionFilter', () => {
     const limit = 2;
     const offset = 2;
     
-    it.only('Get Filter Query', () => {
+    it('Get Filter Query', () => {
         const instance = AuctionFilter.getInstance();
         instance.setLimit(limit);
         instance.setOffset(offset);
