@@ -21,5 +21,12 @@ describe('AuctionFilter', () => {
 
         expect(result.offset).equal(result.limit);
     });
+
+    it('Get Query String should contain filter & count', () => {
+        const instance = AuctionFilter.getInstance();
+        const result = instance.getQueryString();
+
+        expect(result.includes('filter')).equal(true);
+    });
    
 });
