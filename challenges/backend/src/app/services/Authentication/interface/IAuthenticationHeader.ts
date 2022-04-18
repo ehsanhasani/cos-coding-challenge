@@ -1,4 +1,4 @@
 export interface IAuthenticationHeader {
-    authtoken: string;
-    userid: string;
+  authtoken: string;
+  userid: string;
 }

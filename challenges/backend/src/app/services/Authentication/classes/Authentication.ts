@@ -10,56 +10,59 @@ import { ICanBeAuthenticate } from "../interface/ICanBeAuthenticated";
 
 @injectable()
 export class Authentication implements IAuthentication {
-    private result: IAuthenticationResult;
+  private result: IAuthenticationResult;
 
-    public setResult(value: IAuthenticationResult): void {
-        this.result = value;
-    }
+  public setResult(value: IAuthenticationResult): void {
+    this.result = value;
+  }
 
-    public getResult(): IAuthenticationResult {
-        return this.result;
-    }
+  public getResult(): IAuthenticationResult {
+    return this.result;
+  }
 
-    public getToken(): string {
-        return this.getResult().token;
-    }
+  public getToken(): string {
+    return this.getResult().token;
+  }
 
-    public getInternalUserUUID(): string {
-        return this.getResult().internalUserUUID;
-    }
+  public getInternalUserUUID(): string {
+    return this.getResult().internalUserUUID;
+  }
 
-    public async authenticate(actor: ICanBeAuthenticate): Promise<IAuthentication> {
-        try {
-            const result = await axios.put(
-                `${process.env.API_BASE_URL}/v1/authentication/${actor.getAuthRequest().email}`,
-                {
-                    password: actor.getAuthRequest().authRequest.password
-                }
-            );
-            
-            this.setResult(result.data);
-        } catch (err: any) {
-            if (err.code == 400) {
-                throw new AuthenticaionInvalidUserMailId();
-            } else if (err.code == 401) {
-                throw new AuthenticaionFaild();
-            } else {
-                throw err;
-            }
+  public async authenticate(
+    actor: ICanBeAuthenticate
+  ): Promise<IAuthentication> {
+    try {
+      const result = await axios.put(
+        `${process.env.API_BASE_URL}/v1/authentication/${
+          actor.getAuthRequest().email
+        }`,
+        {
+          password: actor.getAuthRequest().authRequest.password,
         }
+      );
 
-        return this;
+      this.setResult(result.data);
+    } catch (err: any) {
+      if (err.code == 400) {
+        throw new AuthenticaionInvalidUserMailId();
+      } else if (err.code == 401) {
+        throw new AuthenticaionFaild();
+      } else {
+        throw err;
+      }
     }
 
-    public getAuthenticationHeader(): IAuthenticationHeader {
-        return {
-            authtoken: this.getToken(),
-            userid: this.getInternalUserUUID()
-        }
-    }
+    return this;
+  }
 
-    public static getInstance(): IAuthentication {
-        return new Authentication();
-    }
+  public getAuthenticationHeader(): IAuthenticationHeader {
+    return {
+      authtoken: this.getToken(),
+      userid: this.getInternalUserUUID(),
+    };
+  }
 
+  public static getInstance(): IAuthentication {
+    return new Authentication();
+  }
 }

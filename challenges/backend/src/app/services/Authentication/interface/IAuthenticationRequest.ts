@@ -1,4 +1,4 @@
 export interface IAuthenticationRequest {
-    password: string;
-    meta?: string;
+  password: string;
+  meta?: string;
 }
