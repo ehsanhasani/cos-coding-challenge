@@ -1,7 +1,7 @@
 import { IAuctionFilter } from "../interfaces/IAuctionFilter";
 
 export class AuctionFilter implements IAuctionFilter {
-  private _limit = 50;
+  private _limit = 10;
   private _offset = 0;
   private _count = false;
 
@@ -34,7 +34,7 @@ export class AuctionFilter implements IAuctionFilter {
     }
 
     if (this.getOffset()) {
-      filter["offset"] = this.getLimit();
+      filter["offset"] = this.getOffset();
     }
 
     return JSON.stringify(filter);
@@ -45,9 +45,9 @@ export class AuctionFilter implements IAuctionFilter {
   }
 
   public nextPage(currentPage: number): string {
-    this.setOffset(currentPage - 1 * this.getLimit());
+    this.setOffset(currentPage * this.getLimit());
 
-    return this.getFilterQuery();
+    return this.getQueryString();
   }
 
   public static getInstance(): IAuctionFilter {

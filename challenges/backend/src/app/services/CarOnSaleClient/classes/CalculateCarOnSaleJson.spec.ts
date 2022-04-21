@@ -1,5 +1,7 @@
 import { expect } from "chai";
 import { AuctionCollection } from "../../Auction";
+import { AuctionFilter } from "../../Auction/classes/AuctionFilter";
+import { AuctionRequest } from "../../Auction/classes/AuctionRequest";
 import { CalculateCarOnSaleJson } from "./CalculateCarOnSaleJson";
 
 describe("CalculateCarOnSaleJson", () => {
@@ -20,9 +22,11 @@ describe("CalculateCarOnSaleJson", () => {
   };
 
   it("Calculate the result", async () => {
-    const collection = AuctionCollection.getInstance(input);
+    const filter = new AuctionFilter();
+    const autionRequest = new AuctionRequest('', filter, {});
+    const collection = AuctionCollection.getInstance(input, autionRequest);
     const instance = CalculateCarOnSaleJson.getInstance();
-    const result = JSON.parse(instance.calculate(collection));
+    const result = JSON.parse(await instance.calculate(collection));
     expect(result.totalAuctions).equal(input.total);
     expect(result.averageBids).equal(0);
     expect(result.averageBidsRatio).equal(

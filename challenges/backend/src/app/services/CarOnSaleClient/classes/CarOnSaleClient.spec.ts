@@ -2,6 +2,7 @@ import axios from "axios";
 import { expect } from "chai";
 import sinon from "sinon";
 import { AuctionCollection } from "../../Auction";
+import { AuctionRequest } from "../../Auction/classes/AuctionRequest";
 import { Authentication } from "../../Authentication/classes/Authentication";
 import { CarOnSaleClient } from "./CarOnSaleClient";
 
@@ -44,7 +45,9 @@ describe("CarOnSaleClient", () => {
     sandbox.stub(axios, "get").returns(resolved);
     const instance = new CarOnSaleClient();
     const result = await instance.getRunningAuctions(auth);
+
     expect(result).is.instanceOf(AuctionCollection);
     expect(result.length).eq(input.items.length);
+    expect(result.getAuctionRequest()).instanceOf(AuctionRequest);
   });
 });
