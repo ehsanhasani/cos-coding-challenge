@@ -6,7 +6,6 @@ import { ICarOnSaleCalculation } from "../interface/ICarOnSaleCalculation";
 @injectable()
 export class CalculateCarOnSaleJson implements ICarOnSaleCalculation {
   public async calculate(auctions: IAuctionCollection): Promise<string> {
-
     if (auctions.length == 0) {
       throw new Error("Auctions list is empty");
     }
@@ -21,19 +20,31 @@ export class CalculateCarOnSaleJson implements ICarOnSaleCalculation {
 
     const result = {
       totalAuctions: auctions.getTotal(),
-      averageBids: CalculateCarOnSaleJson.calculateAverageBids(sumOfBids, auctions),
-      averageBidsRatio: CalculateCarOnSaleJson.calculateBidsRatio(sumOfBidsRatios, auctions),
+      averageBids: CalculateCarOnSaleJson.calculateAverageBids(
+        sumOfBids,
+        auctions
+      ),
+      averageBidsRatio: CalculateCarOnSaleJson.calculateBidsRatio(
+        sumOfBidsRatios,
+        auctions
+      ),
     };
 
     return JSON.stringify(result);
   }
 
-  public static calculateAverageBids(sumOfBids: number, auctions: IAuctionCollection): number {
+  public static calculateAverageBids(
+    sumOfBids: number,
+    auctions: IAuctionCollection
+  ): number {
     const averageBids = sumOfBids / auctions.getTotal();
     return +averageBids.toFixed(2);
   }
 
-  public static calculateBidsRatio(sumOfBidsRatios: number, auctions: IAuctionCollection): number {
+  public static calculateBidsRatio(
+    sumOfBidsRatios: number,
+    auctions: IAuctionCollection
+  ): number {
     const averageBidsRatio = sumOfBidsRatios / auctions.getTotal();
     return +averageBidsRatio.toFixed(2);
   }

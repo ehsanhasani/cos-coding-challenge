@@ -23,7 +23,7 @@ describe("CalculateCarOnSaleJson", () => {
 
   it("Calculate the result", async () => {
     const filter = new AuctionFilter();
-    const autionRequest = new AuctionRequest('', filter, {});
+    const autionRequest = new AuctionRequest("", filter, {});
     const collection = AuctionCollection.getInstance(input, autionRequest);
     const instance = CalculateCarOnSaleJson.getInstance();
     const result = JSON.parse(await instance.calculate(collection));

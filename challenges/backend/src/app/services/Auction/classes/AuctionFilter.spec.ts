@@ -19,7 +19,7 @@ describe.only("AuctionFilter", () => {
     const result = instance.nextPage(1);
     console.log(result);
     expect(instance.getOffset()).equal(instance.getLimit());
-    expect(result).contains("{\"limit\":10,\"offset\":10}");
+    expect(result).contains('{"limit":10,"offset":10}');
   });
 
   it("Get Filter Query for next page", () => {
@@ -27,7 +27,7 @@ describe.only("AuctionFilter", () => {
     const result = instance.nextPage(2);
     console.log(result);
     expect(instance.getOffset()).equal(instance.getLimit() * 2);
-    expect(result).contains("{\"limit\":10,\"offset\":20}");
+    expect(result).contains('{"limit":10,"offset":20}');
   });
 
   it("Get Query String should contain filter & count", () => {
