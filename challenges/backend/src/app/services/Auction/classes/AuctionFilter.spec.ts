@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { AuctionFilter } from "./AuctionFilter";
 
-describe.only("AuctionFilter", () => {
+describe("AuctionFilter", () => {
   const limit = 2;
   const offset = 2;
 
@@ -17,7 +17,7 @@ describe.only("AuctionFilter", () => {
   it("Get Filter Query for next page and current page is 1", () => {
     const instance = AuctionFilter.getInstance();
     const result = instance.nextPage(1);
-    console.log(result);
+
     expect(instance.getOffset()).equal(instance.getLimit());
     expect(result).contains('{"limit":10,"offset":10}');
   });
@@ -25,7 +25,7 @@ describe.only("AuctionFilter", () => {
   it("Get Filter Query for next page", () => {
     const instance = AuctionFilter.getInstance();
     const result = instance.nextPage(2);
-    console.log(result);
+
     expect(instance.getOffset()).equal(instance.getLimit() * 2);
     expect(result).contains('{"limit":10,"offset":20}');
   });
